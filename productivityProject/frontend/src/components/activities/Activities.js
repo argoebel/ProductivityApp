@@ -15,14 +15,14 @@ export class Activities extends Component {
 
   render() {
     return (
-      <a href="#" class="list-group-item list-group-item-action">
+      <a href="#" className="list-group-item list-group-item-action">
         TEST
       </a>
     );
   }
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
   activities: state.activities.activities,
 });
 

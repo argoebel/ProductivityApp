@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { createActivity } from "../../actions/activities";
 
-export default class Form extends Component {
+export class Form extends Component {
   render() {
     return (
       <div>
@@ -31,3 +33,5 @@ export default class Form extends Component {
     );
   }
 }
+
+export default connect(null, { createActivity })(Form);
