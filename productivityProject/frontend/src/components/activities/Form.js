@@ -28,6 +28,7 @@ export class Form extends Component {
               placeholder="Duration"
             />
           </div>
+          <button className="btn btn-primary">Add</button>
         </form>
       </div>
     );

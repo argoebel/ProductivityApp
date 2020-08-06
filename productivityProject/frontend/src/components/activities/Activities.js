@@ -14,10 +14,17 @@ export class Activities extends Component {
   }
 
   render() {
+    console.log(this.props.activities);
     return (
-      <a href="#" className="list-group-item list-group-item-action">
-        TEST
-      </a>
+      <div>
+        {this.props.activities.map((activity) => (
+          <a href="#" className="list-group-item list-group-item-action">
+            <p>
+              {activity.time} - {activity.title}
+            </p>
+          </a>
+        ))}
+      </div>
     );
   }
 }
