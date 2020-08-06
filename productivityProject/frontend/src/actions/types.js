@@ -1,0 +1,2 @@
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
+export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
