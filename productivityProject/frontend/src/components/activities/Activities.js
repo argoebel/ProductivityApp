@@ -19,7 +19,7 @@ export class Activities extends Component {
       .sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
 
     return (
-      <div className="border">
+      <div className="border" style={{ width: "20%", textAlign: "center" }}>
         {orderedActivities.map((element, index, array) => {
           let duration =
             new Date(element.endTime).getTime() -
@@ -33,24 +33,49 @@ export class Activities extends Component {
           const style = {
             height: `${duration / 60000}px`,
             marginTop: `${topMargin / 60000}px`,
+            padding: "0",
+            fontSize: "10pt",
           };
 
           return (
-            <a
-              href="#"
+            <div
               className="list-group-item list-group-item-action border"
               style={style}
             >
-              <p>
-                {element.startTime} - {element.title}
-              </p>
-            </a>
+              <a href="#">
+                <p style={{ margin: "0", padding: "0", color: "black" }}>
+                  {element.title}
+                </p>
+                <p style={{ margin: "0", padding: "0", color: "black" }}>
+                  {dateToReadable(element)}
+                </p>
+                <p style={{ margin: "0", padding: "0", color: "black" }}>
+                  {dateToDuration(element)} min
+                </p>
+              </a>
+            </div>
           );
         })}
       </div>
     );
   }
 }
+
+const dateToDuration = (activity) => {
+  return (
+    (new Date(activity.endTime).getTime() -
+      new Date(activity.startTime).getTime()) /
+    60000
+  );
+};
+
+const dateToReadable = (activity) => {
+  return `${new Date(activity.startTime).getHours()}:${
+    new Date(activity.startTime).getMinutes().toString().length == 1
+      ? new Date(activity.startTime).getMinutes().toString() + "0"
+      : new Date(activity.startTime).getMinutes()
+  }`;
+};
 
 const fillCalendar = (activities) => {
   console.log(activities.length);
