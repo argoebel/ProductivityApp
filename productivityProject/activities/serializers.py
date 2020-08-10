@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Activity
+from .models import Activity, Task
+
 
 class ActivitySerializer(serializers.ModelSerializer):
     title = serializers.CharField()
@@ -7,7 +8,21 @@ class ActivitySerializer(serializers.ModelSerializer):
     endTime = serializers.DateTimeField()
     description = serializers.CharField()
     private = serializers.BooleanField()
-    
+
     class Meta:
         model = Activity
         fields = '__all__'
+
+
+class TaskSerializer(serializers.ModelSerializer):
+    # activity = ActivitySerializer()
+
+    class Meta:
+        model = Task
+        fields = '__all__'
+
+    def create(self, validated_data):
+        print('in Create')
+        task = super(TaskSerializer, self).create(validated_data)
+        task.save()
+        return task
