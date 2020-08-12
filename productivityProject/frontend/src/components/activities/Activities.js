@@ -19,43 +19,46 @@ export class Activities extends Component {
       .sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
 
     return (
-      <div className="border" style={{ width: "20%", textAlign: "center" }}>
-        {orderedActivities.map((element, index, array) => {
-          let duration =
-            new Date(element.endTime).getTime() -
-            new Date(element.startTime).getTime();
-          let topMargin = 0;
-          if (index != 0) {
-            topMargin =
-              new Date(element.startTime).getTime() -
-              new Date(array[index - 1].endTime).getTime();
-          }
-          const style = {
-            height: `${duration / 60000}px`,
-            marginTop: `${topMargin / 60000}px`,
-            padding: "0",
-            fontSize: "10pt",
-          };
+      <div style={{ width: "20%", textAlign: "center" }}>
+        <h2>My Schedule!</h2>
+        <div className="border">
+          {orderedActivities.map((element, index, array) => {
+            let duration =
+              new Date(element.endTime).getTime() -
+              new Date(element.startTime).getTime();
+            let topMargin = 0;
+            if (index != 0) {
+              topMargin =
+                new Date(element.startTime).getTime() -
+                new Date(array[index - 1].endTime).getTime();
+            }
+            const style = {
+              height: `${duration / 60000}px`,
+              marginTop: `${topMargin / 60000}px`,
+              padding: "0",
+              fontSize: "10pt",
+            };
 
-          return (
-            <div
-              className="list-group-item list-group-item-action border"
-              style={style}
-            >
-              <a href="#">
-                <p style={{ margin: "0", padding: "0", color: "black" }}>
-                  {element.title}
-                </p>
-                <p style={{ margin: "0", padding: "0", color: "black" }}>
-                  {dateToReadable(element)}
-                </p>
-                <p style={{ margin: "0", padding: "0", color: "black" }}>
-                  {dateToDuration(element)} min
-                </p>
-              </a>
-            </div>
-          );
-        })}
+            return (
+              <div
+                className="list-group-item list-group-item-action border"
+                style={style}
+              >
+                <a href="#">
+                  <p style={{ margin: "0", padding: "0", color: "black" }}>
+                    {element.title}
+                  </p>
+                  <p style={{ margin: "0", padding: "0", color: "black" }}>
+                    {dateToReadable(element)}
+                  </p>
+                  <p style={{ margin: "0", padding: "0", color: "black" }}>
+                    {dateToDuration(element)} min
+                  </p>
+                </a>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }

@@ -1,2 +1,4 @@
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
+export const GET_TASKS = "GET_TASKS";
+export const CREATE_TASK = "CREATE_TASK";
