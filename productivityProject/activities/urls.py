@@ -1,12 +1,13 @@
 from rest_framework import routers
 from django.urls import path
-from .api import ActivityViewSet, TaskAPIView, CreateTaskAPIView
+from .api import TaskAPIView, CreateTaskAPIView, CreateActivityAPIView, ActivityAPIView
 
-router = routers.DefaultRouter()
-router.register('api/activities', ActivityViewSet, 'activities')
+urlpatterns = [
+    path('api/activities',
+         ActivityAPIView.as_view(), name='get_activities'),
+    path('api/activities/create',
+         CreateActivityAPIView.as_view(), name='create_activity'),
 
-urlpatterns = router.urls
-urlpatterns += [
-    path('api/tasks/<int:pk>', TaskAPIView.as_view(), name='get_posts'),
-    path('api/tasks/create', CreateTaskAPIView.as_view(), name='create_post'),
+    path('api/tasks/<int:pk>', TaskAPIView.as_view(), name='get_tasks'),
+    path('api/tasks/create', CreateTaskAPIView.as_view(), name='create_task'),
 ]
