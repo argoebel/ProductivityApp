@@ -13,7 +13,7 @@ export const getActivities = () => (dispatch) => {
 
 // CREATE new activity
 export const createActivity = (activity) => (dispatch) => {
-  axios.post("/api/activities", activity).then((res) => {
+  axios.post("/api/activities/create", activity).then((res) => {
     dispatch({
       type: CREATE_ACTIVITY,
       payload: res.data,

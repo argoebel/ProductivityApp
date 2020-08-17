@@ -9,6 +9,7 @@ class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
+        print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -38,4 +39,5 @@ class UserAPI(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
     def get_object(self):
+        print(self.request.user)
         return self.request.user
