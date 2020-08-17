@@ -15,14 +15,25 @@ export class Login extends Component {
     isAuthenticated: PropTypes.bool,
   };
 
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const { username, password } = this.state;
+    const user = { username, password };
+    this.props.loginUser(user);
+  };
+
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to="/" />;
     }
 
+    const { username, password } = this.state;
+
     return (
       <div>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Username</label>
             <input
@@ -30,8 +41,9 @@ export class Login extends Component {
               type="text"
               className="form-control"
               id="username"
-              aria-describedby="emailHelp"
               placeholder="Username"
+              onChange={this.onChange}
+              value={username}
             />
           </div>
           <div className="form-group">
@@ -42,6 +54,8 @@ export class Login extends Component {
               className="form-control"
               id="exampleInputPassword1"
               placeholder="Password"
+              onChange={this.onChange}
+              value={password}
             />
           </div>
           <button type="submit" className="btn btn-primary">

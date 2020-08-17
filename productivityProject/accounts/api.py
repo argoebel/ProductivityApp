@@ -40,4 +40,8 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         print(self.request.user)
+        print(type(self.request.user))
+        # return self.request.user
+        user = UserSerializer(self.request.user)
+        print(user.data)
         return self.request.user
