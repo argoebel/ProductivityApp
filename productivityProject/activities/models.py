@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Activity(models.Model):
@@ -7,6 +8,8 @@ class Activity(models.Model):
     endTime = models.DateTimeField()
     description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
+    author = models.ForeignKey(
+        User, related_name='activities', on_delete=models.CASCADE, null=True)
 
 
 class Task(models.Model):
