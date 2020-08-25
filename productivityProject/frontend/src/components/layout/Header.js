@@ -10,10 +10,6 @@ export class Header extends Component {
   };
 
   render() {
-    console.log("RENDER");
-    console.log(this.state);
-    console.log(this.props);
-
     const { isAuthenticated, user } = this.props.auth;
 
     let toolbarContent = undefined;
