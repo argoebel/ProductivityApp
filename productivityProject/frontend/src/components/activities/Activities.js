@@ -1,18 +1,35 @@
 import React, { Component } from "react";
 import { getActivities } from "../../actions/activities";
+import { openTaskModal, closeTaskModal } from "../../actions/modals";
 import PropTypes, { element } from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import TaskForm from "./TaskForm";
 
 export class Activities extends Component {
+  // state = {
+  //   taskOpen: null,
+  //   activityOpen: null,
+  // };
+
   static propTypes = {
     activities: PropTypes.array.isRequired,
     getActivities: PropTypes.func.isRequired,
+    modals: PropTypes.object.isRequired,
+    openTaskModal: PropTypes.func.isRequired,
+    closeTaskModal: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
     this.props.getActivities();
   }
+
+  toggleTaskPopup = (elementID) => {
+    console.log(elementID);
+    this.props.openTaskModal(elementID);
+  };
+
+  toggleActivityPopup = (id) => {};
 
   render() {
     let orderedActivities = this.props.activities
@@ -44,18 +61,33 @@ export class Activities extends Component {
               <div
                 className="list-group-item list-group-item-action border"
                 style={style}
+                onClick={() => this.toggleTaskPopup(element.id)}
+                name={element.id}
               >
-                <a href="#">
-                  <p style={{ margin: "0", padding: "0", color: "black" }}>
-                    {element.title}
-                  </p>
-                  <p style={{ margin: "0", padding: "0", color: "black" }}>
-                    {dateToReadable(element)}
-                  </p>
-                  <p style={{ margin: "0", padding: "0", color: "black" }}>
-                    {dateToDuration(element)} min
-                  </p>
-                </a>
+                {this.props.modals.modal != element.id ? (
+                  <div>
+                    <p
+                      style={{ margin: "0", padding: "0", color: "black" }}
+                      name={element.id}
+                    >
+                      {element.title}
+                    </p>
+                    <p
+                      style={{ margin: "0", padding: "0", color: "black" }}
+                      name={element.id}
+                    >
+                      {dateToReadable(element)}
+                    </p>
+                    <p
+                      style={{ margin: "0", padding: "0", color: "black" }}
+                      name={element.id}
+                    >
+                      {dateToDuration(element)} min
+                    </p>
+                  </div>
+                ) : (
+                  <TaskForm />
+                )}
               </div>
             );
           })}
@@ -170,6 +202,11 @@ const fillCalendar = (activities) => {
 
 const mapStateToProps = (state) => ({
   activities: state.activities.activities,
+  modals: state.modals,
 });
 
-export default connect(mapStateToProps, { getActivities })(Activities);
+export default connect(mapStateToProps, {
+  getActivities,
+  openTaskModal,
+  closeTaskModal,
+})(Activities);

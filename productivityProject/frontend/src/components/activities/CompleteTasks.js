@@ -10,8 +10,7 @@ export class CompleteTasks extends Component {
   };
 
   componentDidMount() {
-    console.log("HELLO");
-    this.props.getTasks(1);
+    this.props.getTasks();
   }
 
   render() {
@@ -29,8 +28,6 @@ export class CompleteTasks extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("mapping state");
-  console.log(state);
   return {
     tasks: state.tasks.tasks,
   };
