@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateTime } from "../../actions/clock";
 import PropTypes from "prop-types";
 
 export class Clock extends Component {
@@ -8,14 +7,8 @@ export class Clock extends Component {
     date: new Date(),
   };
 
-  static propTypes = {
-    updateTime: PropTypes.func.isRequired,
-    date: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000);
-    this.props.updateTime(this.state.date);
   }
 
   componentWillUnmount() {
@@ -26,9 +19,6 @@ export class Clock extends Component {
     this.setState({
       date: new Date(),
     });
-    if (this.state.date.getSeconds() == 0) {
-      this.props.updateTime(this.state.date);
-    }
   }
 
   render() {
@@ -40,8 +30,4 @@ export class Clock extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  date: state.date,
-});
-
-export default connect(mapStateToProps, { updateTime })(Clock);
+export default Clock;
