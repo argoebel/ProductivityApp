@@ -30,18 +30,20 @@ export class TaskForm extends Component {
     this.props.closeTaskModal();
   };
 
-  handleClick = (e) => {};
+  handleClose = (e) => {
+    console.log("CLOSE");
+    this.props.closeTaskModal();
+  };
 
   render() {
     const { item, complete } = this.state;
     return (
       <div>
-        <span className="close" onClick={this.handleClick}></span>
-        <div>
-          <form
-            className="card card-body mt-4 mb-4 w-100"
-            onSubmit={this.onSubmit}
-          >
+        <div className="card card-body mt-4 mb-4 w-100">
+          <span className="close" onClick={this.handleClose}>
+            ×
+          </span>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label>Task</label>
               <input

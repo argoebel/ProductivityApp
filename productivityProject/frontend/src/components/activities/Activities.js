@@ -20,8 +20,10 @@ export class Activities extends Component {
   }
 
   toggleTaskPopup = (elementID) => {
-    console.log(elementID);
-    this.props.openTaskModal(elementID);
+    if (!this.props.modals.taskModalOpen) {
+      console.log(elementID);
+      this.props.openTaskModal(elementID);
+    }
   };
 
   toggleActivityPopup = (id) => {};
