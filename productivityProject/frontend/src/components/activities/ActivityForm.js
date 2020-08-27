@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createActivity } from "../../actions/activities";
+import { closeActivityModal } from "../../actions/modals";
 
 export class ActivityForm extends Component {
   state = {
@@ -13,6 +14,7 @@ export class ActivityForm extends Component {
   };
   static propTypes = {
     createActivity: PropTypes.func.isRequired,
+    closeActivityModal: PropTypes.func.isRequired,
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -120,4 +122,6 @@ export class ActivityForm extends Component {
   }
 }
 
-export default connect(null, { createActivity })(ActivityForm);
+export default connect(null, { createActivity, closeActivityModal })(
+  ActivityForm
+);

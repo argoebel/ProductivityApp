@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getActivities } from "../../actions/activities";
-import { openTaskModal, closeTaskModal } from "../../actions/modals";
+import { openTaskModal, openActivityModal } from "../../actions/modals";
 import PropTypes, { element } from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ export class Activities extends Component {
     getActivities: PropTypes.func.isRequired,
     modals: PropTypes.object.isRequired,
     openTaskModal: PropTypes.func.isRequired,
-    closeTaskModal: PropTypes.func.isRequired,
+    openActivityModal: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -21,12 +21,17 @@ export class Activities extends Component {
 
   toggleTaskPopup = (elementID) => {
     if (!this.props.modals.taskModalOpen) {
-      console.log(elementID);
+      console.log("OPEN TASK POPUP");
       this.props.openTaskModal(elementID);
     }
   };
 
-  toggleActivityPopup = (id) => {};
+  toggleActivityPopup = (id) => {
+    if (!this.props.modals.taskModalOpen) {
+      console.log("OPEN ACTIVITY POPUP");
+      this.props.openActivityModal();
+    }
+  };
 
   render() {
     let orderedActivities = this.props.activities
@@ -36,7 +41,7 @@ export class Activities extends Component {
     return (
       <div style={{ width: "20%", textAlign: "center" }}>
         <h2>My Schedule!</h2>
-        <div className="border">
+        <div className="border" onClick={this.toggleActivityPopup}>
           {orderedActivities.map((element, index, array) => {
             let duration =
               new Date(element.endTime).getTime() -
@@ -133,5 +138,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getActivities,
   openTaskModal,
-  closeTaskModal,
+  openActivityModal,
 })(Activities);
