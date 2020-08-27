@@ -6,6 +6,7 @@ import Activities from "./Activities";
 import CompleteTasks from "./CompleteTasks";
 import IncompleteTasks from "./IncompleteTasks";
 import TaskForm from "./TaskForm";
+import Clock from "./Clock";
 
 export default function Dashboard() {
   return (
@@ -14,6 +15,7 @@ export default function Dashboard() {
         <CompleteTasks />
         <IncompleteTasks />
       </div>
+      <Clock />
       <Activities />
     </div>
   );

@@ -7,11 +7,6 @@ import { Link } from "react-router-dom";
 import TaskForm from "./TaskForm";
 
 export class Activities extends Component {
-  // state = {
-  //   taskOpen: null,
-  //   activityOpen: null,
-  // };
-
   static propTypes = {
     activities: PropTypes.array.isRequired,
     getActivities: PropTypes.func.isRequired,
